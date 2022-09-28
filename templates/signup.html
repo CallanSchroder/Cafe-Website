@@ -1,0 +1,39 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create an account</title>
+</head>
+<header class="masthead">
+    <center>
+    <div class="overlay"></div>
+    <div class="container" >
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Sign Up</h1>
+              <span class="subheading">Thank you for signing up with 'cafes in your area'</span>
+              <p> Already have an account? <a class="nav-link" href="{{ url_for('login') }}">Login</a> Instead</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </center>
+  </header>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+</body>
+</html>

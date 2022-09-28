@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% extends 'bootstrap/base.html' %}  {% import "bootstrap/wtf.html"as wtf %} {% block content %}
+<html lang="en"> <head>
+    <meta charset="UTF-8">
+    <title>Create Cafe</title> </head>
+<header class="masthead">
+    <center>
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Create Account</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    </center>
+  </header>
+<body>
+{{ ckeditor.load() }}
+{{ ckeditor.config(name='body') }}
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto content">
+{{ wtf.quick_form(form, novalidate=True,button_map={"submit": "primary"}) }} {% endblock %} ]
+        </div>
+    </div>
+</div>
+</body>
+</html>

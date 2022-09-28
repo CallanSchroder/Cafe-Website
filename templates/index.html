@@ -1,0 +1,95 @@
+<!DOCTYPE html> <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Internet Cafes</title>   <!-- Bootstrap core CSS --><!-- Custom fonts for this template -->
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'><!-- Navigation -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+ <nav class="navbar navbar-expand-lg navbar-dark bg-primary " id="mainNav">
+    <div>
+         <h2>
+         <p> <a class="navbar-brand" href="{{url_for('display_all')}}">Cafes in my Area</a> </p>
+         </h2>
+     </div>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('display_all') }}">Home</a>
+          </li>
+          {% if not current_user.is_authenticated: %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+          </li>
+          {% else: %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
+          </li>
+            </li>
+            </ul>
+          {% endif %}
+      </div>
+  </nav>
+</head>
+
+<body>
+<table class = "table table-bordered">
+        <div class="row">
+            <div>
+                <thead>
+                <tr>
+                <h2>
+                    <b>
+                        <th  scope="col"> No. </th>
+                        <th  scope="col"> Cafe </th>
+                        <th  scope="col"> has wifi? </th>
+                        <th  scope="col"> laptop Friendly? </th>
+                        <th  scope="col"> Rating </th>
+                        <th  scope="col"> Address </th>
+                        {% if current_user.is_authenticated: %}
+                        <th  scope="col"> Delete post</th>
+                        {% endif %}
+            </b>
+            </h2>
+            </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for post in all_posts %}
+                    <th scope="row"> {{post.id}}</th>
+                    <td>{{post.title}}</td>
+                    <td>{{post.has_wifi}}</td>
+                    <td>{{post.has_electricity}}</td>
+                    <td>{{post.rating}}</td>
+                    <td>{{post.address}}</td>
+                    {% if current_user.is_authenticated: %}
+                    <td> <a href="{{url_for('delete_post', post_id = post.id)}}"> Delete post</a></td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </div>        <!-- New Post -->
+        </div>
+
+</table>
+ </h3>
+<hr>
+<div class="clearfix">
+    {% if current_user.is_authenticated: %}
+    <a class="btn btn-primary float-right" href="{{url_for('post_new_cafe')}}">Post new Cafe</a>
+    {% endif %}
+</div>
+</body>
+</html>
